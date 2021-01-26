@@ -11,6 +11,7 @@ import helmet from 'helmet'
 import logger from 'morgan'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
+import { router } from './routes/router.js'
 
 /**
  * The main function of the application.
@@ -30,7 +31,8 @@ const main = () => {
 
     // View engine setup.
     app.engine('hbs', hbs.express4({
-      defaultLayout: join(directoryFullName, 'views', 'layouts', 'default')
+      defaultLayout: join(directoryFullName, 'views', 'layouts', 'default'),
+      partialsDir: join(directoryFullName, 'views', 'partials')
     }))
     app.set('view engine', 'hbs')
     app.set('views', join(directoryFullName, 'views'))
@@ -49,6 +51,9 @@ const main = () => {
 
       next()
     })
+
+    // Register routes.
+    app.use('/', router)
 
     // Error handler.
     app.use(function (err, req, res, next) {
