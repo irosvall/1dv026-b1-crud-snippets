@@ -6,10 +6,19 @@
  */
 
 // "Faking" persistent textValues.
-const viewData = [
-  { textValue: 'bla bla bla bla' },
-  { textValue: 'bla bla bla bla' },
-  { textValue: 'bla test bla test' }
+const snippets = [
+  {
+    username: 'Ida',
+    textValue: 'bla bla bla bla'
+  },
+  {
+    username: 'Ida',
+    textValue: 'bla bla bla bla'
+  },
+  {
+    username: 'Julia',
+    textValue: 'bla test test bla'
+  }
 ]
 
 /**
@@ -25,6 +34,7 @@ export class CrudeSnippetsController {
    */
   async index (req, res, next) {
     try {
+      const viewData = { snippets }
       res.render('crude-snippets/index', { viewData })
     } catch (error) {
       next(error)

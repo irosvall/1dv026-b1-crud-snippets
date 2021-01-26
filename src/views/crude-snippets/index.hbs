@@ -1,1 +1,23 @@
 <h1>Crude Snippets</h1>
+
+<div id="crud-snippets-container">
+  {{#if viewData.snippets.length }}
+  {{#each viewData.snippets}}
+  <div class="snippet">
+    <div class="snippet-header">
+      <h4>{{this.username}}</h4>
+      <a href="./{{this.id}}/edit">Edit</a>
+      <a href="./{{this.id}}/remove">Delete</a>
+    </div>
+    <div class="snippet-content">
+      <p>{{this.textValue}}</p>
+    </div>
+    <div class="snippet-footer">
+      <time class="snippet-time">1 hour ago</time>
+    </div>
+  </div>
+  {{/each}}
+  {{else}}
+  <p class="information">There are no snippets made. Try create one.</p>
+  {{/if}}
+</div>
