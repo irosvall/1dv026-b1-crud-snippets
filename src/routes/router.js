@@ -7,11 +7,11 @@
 
 import express from 'express'
 import createError from 'http-errors'
-import { router as crudeSnippetsRouter } from './crude-snippets-router.js'
+import { router as crudSnippetsRouter } from './crud-snippets-router.js'
 
 export const router = express.Router()
 
-router.use('/', crudeSnippetsRouter)
+router.use('/', crudSnippetsRouter)
 
 // Catch 404.
 router.use('*', (req, res, next) => next(createError(404)))

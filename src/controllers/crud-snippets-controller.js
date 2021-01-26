@@ -1,5 +1,5 @@
 /**
- * Module for the CrudeSnippetsController.
+ * Module for the CrudSnippetsController.
  *
  * @author Ida Rosvall <ir222gn@student.lnu.se
  * @version 1.0.0
@@ -22,9 +22,9 @@ const snippets = [
 ]
 
 /**
- * Encapsulates the crude snippets controller.
+ * Encapsulates the crud snippets controller.
  */
-export class CrudeSnippetsController {
+export class CrudSnippetsController {
   /**
    * Displays a list of text snippets.
    *
@@ -35,7 +35,7 @@ export class CrudeSnippetsController {
   async index (req, res, next) {
     try {
       const viewData = { snippets }
-      res.render('crude-snippets/index', { viewData })
+      res.render('crud-snippets/index', { viewData })
     } catch (error) {
       next(error)
     }
