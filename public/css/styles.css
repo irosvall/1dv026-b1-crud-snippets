@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/* ------ Grundstilen för sidorna ----- */
+
+html {
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Ta bort inbyggda marginaler och ändra box-sizing */
+html, body, nav, header, main, aside, footer, section, div, figure {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  color: #000000;
+  padding: 0 7px 20px 7px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body {
+  background-color: rgb(248, 246, 244);
+}
