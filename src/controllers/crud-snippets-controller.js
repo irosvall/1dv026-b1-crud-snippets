@@ -5,19 +5,19 @@
  * @version 1.0.0
  */
 
-// "Faking" persistent textValues.
+// "Faking" persistent snippets.
 const snippets = [
   {
     username: 'Ida',
-    textValue: 'bla bla bla bla'
+    message: 'bla bla bla bla'
   },
   {
     username: 'Ida',
-    textValue: 'bla bla bla bla'
+    message: 'bla bla bla bla'
   },
   {
     username: 'Julia',
-    textValue: 'bla test test bla'
+    message: 'bla test test bla'
   }
 ]
 

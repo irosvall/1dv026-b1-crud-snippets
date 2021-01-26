@@ -55,7 +55,45 @@ body {
   color: #db1c1c;
 }
 
-/* ------ LINK STYLES ----- */
+/* ------ Snippet post styles ----- */
+.snippet-form {
+  width: max-content;
+  margin: 0 auto;
+}
+
+.snippet-form label {
+  font-size: 1.05em;
+}
+
+.snippet-form textarea {
+  display: block;
+  font-size: 1.2em;
+  font-family: inherit;
+  padding: 0.2em 0.5em;
+  margin-top: 5px;
+  resize: none;
+  width: 600px;
+  height: 5em;
+}
+
+.snippet-form button {
+  display: block !important;
+  color: white;
+  font-size: 1.3em;
+  font-weight: 600;
+  display: inline-block;
+  background-color: #3f5268;
+  padding: 0.5em 1.2em 0.5em 1.2em;
+  margin: 0 auto;
+  margin-top: 0.5em;
+  cursor: pointer;
+}
+
+.snippet-form button:hover, .snippet-form button:active {
+  background-color: #4f6074;
+}
+
+/* ------ Link styles ----- */
 a {
   text-decoration: none;
 }

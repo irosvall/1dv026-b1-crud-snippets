@@ -10,7 +10,7 @@
       <a href="./{{this.id}}/remove" class="snippet-remove">Delete</a>
     </div>
     <div class="snippet-content">
-      <p>{{this.textValue}}</p>
+      <p>{{this.message}}</p>
     </div>
     <div class="snippet-footer">
       <time class="snippet-time">1 hour ago</time>
@@ -21,3 +21,10 @@
   <p class="information">There are no snippets made. Try create one.</p>
   {{/if}}
 </div>
+
+<form class="snippet-form" method="post" action="./crud-snippets/create">
+  <label for="message">Write your message here:</label>
+  <textarea id="message" name="message" placeholder="Today I feel..." required="required"
+    autofocus="autofocus"></textarea>
+  <button type="submit">Post</button>
+</form>
