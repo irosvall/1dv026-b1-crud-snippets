@@ -28,3 +28,42 @@ main {
 body {
   background-color: rgb(248, 246, 244);
 }
+
+/* ------ Snippet styles ----- */
+.snippet {
+  background-color: rgb(255, 255, 255);
+  max-width: 1000px;
+  margin: 15px auto;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.snippet-header {
+  display: flex;
+}
+
+.snippet-header h4 {
+  margin: 0;
+  margin-right: auto;
+}
+
+.snippet-header a {
+  margin-left: 10px;
+}
+
+.snippet-remove:hover, .snippet-remove:active {
+  color: #db1c1c;
+}
+
+/* ------ LINK STYLES ----- */
+a {
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: #0f3966;
+}
+
+a:hover, a:active {
+  color: #4d647e;
+}
