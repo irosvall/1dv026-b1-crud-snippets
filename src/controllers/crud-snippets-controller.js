@@ -40,4 +40,24 @@ export class CrudSnippetsController {
       next(error)
     }
   }
+
+  /**
+   * Creates a new snippet.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async create (req, res, next) {
+    try {
+      snippets.push({
+        username: 'Test',
+        message: req.body.message
+      })
+
+      res.redirect('.')
+    } catch (error) {
+      next(error)
+    }
+  }
 }
