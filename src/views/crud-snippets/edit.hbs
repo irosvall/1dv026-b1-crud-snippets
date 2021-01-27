@@ -1,0 +1,23 @@
+<h2>Edit</h2>
+
+<form method="post" action="./{{viewData.id}}/update">
+  <input type="hidden" name="id" value="{{viewData.id}}" />
+  <div class="snippet">
+    <div class="snippet-header">
+      <h4>{{viewData.username}}</h4>
+    </div>
+    <div class="snippet-content">
+      <p>{{viewData.message}}</p>
+    </div>
+    <div class="snippet-footer">
+      <time class="snippet-time">{{viewData.createdAt}}</time>
+    </div>
+  </div>
+
+  <div class="snippet-form">
+    <label for="message">Edit your message:</label>
+    <textarea id="message" name="message" required="required"
+      autofocus="autofocus">{{viewData.message}}</textarea>
+  </div>
+  <button type="submit">Save changes</button>
+</form>

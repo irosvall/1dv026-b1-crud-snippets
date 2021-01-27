@@ -60,6 +60,53 @@ export class CrudSnippetsController {
   }
 
   /**
+   * Returns a HTML form for editing a snippet.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async edit (req, res, next) {
+    try {
+      const snippet = await Snippet.findOne({ _id: req.params.id })
+      const viewData = {
+        id: snippet._id,
+        username: snippet.username,
+        message: snippet.message,
+        createdAt: moment(snippet.createdAt).fromNow()
+      }
+      res.render('crud-snippets/edit', { viewData })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
+   * Updates the specified snippet.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async update (req, res, next) {
+    try {
+      const result = await Snippet.updateOne({ _id: req.body.id }, {
+        message: req.body.message
+      })
+
+      if (result.nModified === 1) {
+        console.log('Snippet change success')
+      } else {
+        console.log('Snippet change not success')
+      }
+
+      res.redirect('..')
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  /**
    * Returns a HTML form for removing a snippet.
    *
    * @param {object} req - Express request object.
