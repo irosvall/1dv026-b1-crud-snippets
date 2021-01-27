@@ -5,21 +5,8 @@
  * @version 1.0.0
  */
 
-// "Faking" persistent snippets.
-const snippets = [
-  {
-    username: 'Ida',
-    message: 'bla bla bla bla'
-  },
-  {
-    username: 'Ida',
-    message: 'bla bla bla bla'
-  },
-  {
-    username: 'Julia',
-    message: 'bla test test bla'
-  }
-]
+import moment from 'moment'
+import { Snippet } from '../models/snippet.js'
 
 /**
  * Encapsulates the crud snippets controller.
@@ -34,7 +21,16 @@ export class CrudSnippetsController {
    */
   async index (req, res, next) {
     try {
-      const viewData = { snippets }
+      const viewData = {
+        snippets: (await Snippet.find({}))
+          .map(snippet => ({
+            id: snippet._id,
+            username: snippet.username,
+            message: snippet.message,
+            createdAt: moment(snippet.createdAt).fromNow()
+          }))
+      }
+
       res.render('crud-snippets/index', { viewData })
     } catch (error) {
       next(error)
@@ -50,10 +46,12 @@ export class CrudSnippetsController {
    */
   async create (req, res, next) {
     try {
-      snippets.push({
-        username: 'Test',
+      const snippet = new Snippet({
+        username: 'TestRabbit',
         message: req.body.message
       })
+
+      await snippet.save()
 
       res.redirect('.')
     } catch (error) {
