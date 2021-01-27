@@ -17,3 +17,6 @@ router.get('/', controller.index)
 
 router.get('/new', controller.index)
 router.post('/create', controller.create)
+
+router.get('/:id/remove', controller.remove)
+router.post('/:id/delete', controller.delete)

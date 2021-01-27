@@ -1,0 +1,17 @@
+<p>By deleting this you won't be able to undo. Are you sure?</p>
+
+<form method="post" action="./{{viewData.id}}/delete">
+  <input type="hidden" name="id" value="{{viewData.id}}" />
+  <div class="snippet">
+    <div class="snippet-header">
+      <h4>{{viewData.username}}</h4>
+    </div>
+    <div class="snippet-content">
+      <p>{{viewData.message}}</p>
+    </div>
+    <div class="snippet-footer">
+      <time class="snippet-time">{{viewData.createdAt}}</time>
+    </div>
+  </div>
+  <button type="submit" autofocus="autofocus">Delete</button>
+</form>
