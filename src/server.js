@@ -8,12 +8,16 @@
 import express from 'express'
 import hbs from 'express-hbs'
 import session from 'express-session'
+import mongoose from 'mongoose'
+import connectMongo from 'connect-mongo'
 import helmet from 'helmet'
 import logger from 'morgan'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
 import { router } from './routes/router.js'
 import { connectDB } from './config/mongoose.js'
+
+const MongoStore = connectMongo(session)
 
 /**
  * The main function of the application.
@@ -48,14 +52,21 @@ const main = async () => {
     // Serve static files.
     app.use(express.static(join(directoryFullName, '..', 'public')))
 
-    // Setup and use session middleware
+    // Setup the session storage.
+    const sessionStore = new MongoStore({
+      mongooseConnection: mongoose.connection,
+      collection: 'sessions'
+    })
+
+    // Setup and use session middleware.
     const sessionOptions = {
       name: process.env.SESSION_NAME,
       secret: process.env.SESSION_SECRET,
+      store: sessionStore,
       resave: false, // Resave even if a request is not changing the session.
       saveUninitialized: false, // Don't save a created but not modified session.
       cookie: {
-        secure: true,
+        secure: false, // TODO: Change in production
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24, // 1 day
         sameSite: 'lax'
@@ -64,8 +75,14 @@ const main = async () => {
 
     app.use(session(sessionOptions))
 
-    // middleware to be executed before the routes
+    // middleware to be executed before the routes.
     app.use((req, res, next) => {
+      // flash messages - survives only a round trip
+      if (req.session.flash) {
+        res.locals.flash = req.session.flash
+        delete req.session.flash
+      }
+
       // Pass the base URL to the views.
       res.locals.baseURL = baseURL
 
