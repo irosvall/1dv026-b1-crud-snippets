@@ -1,0 +1,23 @@
+<header>
+  <nav>
+    <ul class="home-nav">
+      <li>
+        <a class="home-link" href="./">CRUD Snippets</a>
+      </li>
+    </ul>
+    <ul class="main-nav">
+      {{#if loggedIn }}
+      <li>
+        <a class="nav-link" href="./logout">Log out</a>
+      </li>
+      {{else}}
+      <li>
+        <a class="nav-link" href="./registration">Create account</a>
+      </li>
+      <li>
+        <a class="nav-link" href="./login">Log in</a>
+      </li>
+      {{/if}}
+    </ul>
+  </nav>
+</header>

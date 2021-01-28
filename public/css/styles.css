@@ -27,6 +27,70 @@ main {
 
 body {
   background-color: rgb(248, 246, 244);
+  margin-top: 66px; /* Added because of the fixed header */
+}
+
+/* ------ Header Styles ----- */
+nav {
+  background-color: #e9deda;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.main-nav {
+  margin-right: 0.8em;
+  display: flex;
+  padding: 1em;
+  gap: 1.2em;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  list-style: none;
+}
+
+.home-nav {
+  margin: 0.5em auto 0 1em;
+}
+
+.home-link {
+  font-size: 1.4em;
+  font-weight: 600;
+  padding-left: 5px;
+}
+
+.nav-link {
+  background-color: rgb(255, 255, 255);
+  font-weight: 600;
+  padding: 0.5em 1.2em;
+  border-radius: 5px;
+}
+
+.nav-link:link, .nav-link:visited {
+  color: #2e455e;
+} 
+
+.nav-link:hover, .nav-link:active {
+  background-color: #f5f1ef;
+} 
+
+/* ------ Footer Styles ----- */
+
+footer {
+  background-color: #e9deda;
+  padding: 8px;
+}
+
+footer p {
+  color: #1f3042;
+  text-align: center;
+  font-size: 0.95em;
 }
 
 /* ------ Snippet styles ----- */
@@ -57,7 +121,7 @@ body {
 /* ------ Snippet post styles ----- */
 .snippet-form {
   width: max-content;
-  margin: 20px auto;
+  margin: 20px auto 40px auto;
 }
 
 .snippet-form label {
