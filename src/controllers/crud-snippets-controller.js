@@ -42,9 +42,8 @@ export class CrudSnippetsController {
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
-   * @param {Function} next - Express next middleware function.
    */
-  async create (req, res, next) {
+  async create (req, res) {
     try {
       const snippet = new Snippet({
         username: 'TestRabbit',
@@ -53,9 +52,11 @@ export class CrudSnippetsController {
 
       await snippet.save()
 
+      req.session.flash = { type: 'success', text: 'The post was created successfully.' }
       res.redirect('.')
     } catch (error) {
-      next(error)
+      req.session.flash = { type: 'danger', text: error.message }
+      res.redirect('.')
     }
   }
 
@@ -86,23 +87,23 @@ export class CrudSnippetsController {
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
-   * @param {Function} next - Express next middleware function.
    */
-  async update (req, res, next) {
+  async update (req, res) {
     try {
       const result = await Snippet.updateOne({ _id: req.body.id }, {
         message: req.body.message
       })
 
       if (result.nModified === 1) {
-        console.log('Snippet change success')
+        req.session.flash = { type: 'success', text: 'The post was changed successfully.' }
       } else {
-        console.log('Snippet change not success')
+        req.session.flash = { type: 'danger', text: 'The post you attempted to edit has been removed.' }
       }
 
       res.redirect('..')
     } catch (error) {
-      next(error)
+      req.session.flash = { type: 'danger', text: error.message }
+      res.redirect('./edit')
     }
   }
 
@@ -141,9 +142,11 @@ export class CrudSnippetsController {
     try {
       await Snippet.deleteOne({ _id: req.body.id })
 
+      req.session.flash = { type: 'success', text: 'The post was deleted successfully.' }
       res.redirect('..')
     } catch (error) {
-      next(error)
+      req.session.flash = { type: 'danger', text: error.message }
+      res.redirect('./remove')
     }
   }
 }
