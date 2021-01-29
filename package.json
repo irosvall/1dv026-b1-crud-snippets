@@ -28,7 +28,8 @@
     "http-errors": "^1.8.0",
     "moment": "^2.29.1",
     "mongoose": "^5.11.13",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "validator": "^13.5.2"
   },
   "devDependencies": {
     "@lnu/eslint-config": "^1.1.2",
