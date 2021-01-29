@@ -12,8 +12,6 @@ import { router as accountRouter } from './account-router.js'
 
 export const router = express.Router()
 
-console.log('router')
-
 router.use('/', crudSnippetsRouter)
 router.use('/account', accountRouter)
 

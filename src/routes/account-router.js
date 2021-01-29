@@ -13,6 +13,7 @@ export const router = express.Router()
 const controller = new AccountController()
 
 // Map HTTP verbs and route paths to controller actions.
-console.log('account router')
 router.get('/registration', controller.registration)
+router.post('/register', controller.register)
+
 router.get('/login', controller.login)

@@ -13,7 +13,6 @@ export const router = express.Router()
 const controller = new CrudSnippetsController()
 
 // Map HTTP verbs and route paths to controller actions.
-console.log('crud router')
 router.get('/', controller.index)
 
 router.get('/new', controller.index)

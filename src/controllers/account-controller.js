@@ -5,12 +5,14 @@
  * @version 1.0.0
  */
 
+import { User } from '../models/user.js'
+
 /**
  * Encapsulates the account controller.
  */
 export class AccountController {
   /**
-   * Returns a HTML form to register a new account.
+   * Returns a HTML form to register a new user.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -21,6 +23,30 @@ export class AccountController {
       res.render('accounts/registration')
     } catch (error) {
       next(error)
+    }
+  }
+
+  /**
+   * Creates a new user.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   */
+  async register (req, res) {
+    try {
+      const user = new User({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email
+      })
+
+      await user.save()
+
+      req.session.flash = { type: 'success', text: 'Your account was created successfully.' }
+      res.redirect('./login')
+    } catch (error) {
+      req.session.flash = { type: 'danger', text: error.message }
+      res.redirect('./registration')
     }
   }
 
