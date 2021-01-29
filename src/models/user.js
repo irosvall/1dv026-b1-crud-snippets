@@ -6,31 +6,38 @@
  */
 
 import mongoose from 'mongoose'
-import isEmail from 'validator/lib/isEmail'
+import bcrypt from 'bcryptjs'
+import validator from 'validator'
 
 // Create a schema.
 const schema = new mongoose.Schema({
   username: {
     type: String,
-    unique: true,
+    trim: true,
+    unique: '{VALUE} is already taken.',
     required: 'A {PATH} is required.',
-    trim: true
+    maxlength: [25, 'The {PATH} has extended the limit of {MAXLENGTH} characters.'],
+    validate: [validator.isAlphanumeric, '{PATH} is only allowed to contain numbers and letters (a-z)']
   },
   password: {
     type: String,
     required: 'A {PATH} is required.',
-    minlength: [6, 'The {PATH} must contain at least {MINLENGHT} characters.'],
-    maxlength: [2000, 'The {PATH} has extended the limit of {MAXLENGHT} characters.']
+    minlength: [6, 'The {PATH} must contain at least {MINLENGTH} characters.'],
+    maxlength: [2000, 'The {PATH} has extended the limit of {MAXLENGTH} characters.']
   },
   email: {
     type: String,
-    unique: true,
+    unique: '{VALUE} is already in use.',
     required: 'A {PATH} is required.',
-    validate: [isEmail, '{PATH} is not valid']
+    validate: [validator.isEmail, '{PATH} is not valid']
   }
 }, {
-  timestamps: true,
-  versionKey: false
+  timestamps: true
+})
+
+// Salts and hashes the password before save.
+schema.pre('save', async function () {
+  this.password = await bcrypt.hash(this.password, 10)
 })
 
 // Create a model using the schema.
