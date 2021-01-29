@@ -40,5 +40,22 @@ schema.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, 10)
 })
 
+/**
+ * Authenticates a user.
+ *
+ * @param {string} username - A username.
+ * @param {string} password - A password.
+ * @returns {Promise} A promise that resolves into an object representing the user.
+ */
+schema.statics.authenticate = async function (username, password) {
+  const user = await this.findOne({ username })
+
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    throw new Error('Usernamn or password is wrong.')
+  }
+
+  return user
+}
+
 // Create a model using the schema.
 export const User = mongoose.model('User', schema)

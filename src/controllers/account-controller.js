@@ -65,4 +65,32 @@ export class AccountController {
       next(error)
     }
   }
+
+  /**
+   * Log in a user.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   */
+  async loginpost (req, res, next) {
+    try {
+      const user = await User.authenticate(req.body.username, req.body.password)
+
+      // Generate a new session.
+      req.session.regenerate((error) => {
+        if (!error) {
+          req.session.username = user.username
+
+          req.session.flash = { type: 'success', text: 'You are now logged in.' }
+          res.redirect('..')
+        } else {
+          next(error)
+        }
+      })
+    } catch (error) {
+      req.session.flash = { type: 'danger', text: error.message }
+      res.redirect('./login')
+    }
+  }
 }
