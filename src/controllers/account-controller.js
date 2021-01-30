@@ -5,6 +5,7 @@
  * @version 1.0.0
  */
 
+import createError from 'http-errors'
 import { User } from '../models/user.js'
 
 /**
@@ -67,7 +68,7 @@ export class AccountController {
   }
 
   /**
-   * Log in a user.
+   * Log in a user. Generates a new session cookie.
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
@@ -77,7 +78,6 @@ export class AccountController {
     try {
       const user = await User.authenticate(req.body.username, req.body.password)
 
-      // Generate a new session.
       req.session.regenerate((error) => {
         if (!error) {
           req.session.username = user.username
@@ -91,6 +91,34 @@ export class AccountController {
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
       res.redirect('./login')
+    }
+  }
+
+  /**
+   * Log out a user. Destroys its session cookie.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   * @returns {Function} Express next middleware function.
+   */
+  async logout (req, res, next) {
+    try {
+      // If user isn't logged in it's not able to log out.
+      if (!req.session.username) {
+        return next(createError(404))
+      } else {
+        req.session.destroy((error) => {
+          if (!error) {
+            res.redirect('..')
+          } else {
+            next(error)
+          }
+        })
+      }
+    } catch (error) {
+      req.session.flash = { type: 'danger', text: error.message }
+      res.redirect('..')
     }
   }
 }

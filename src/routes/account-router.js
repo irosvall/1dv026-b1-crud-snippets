@@ -18,3 +18,5 @@ router.post('/register', controller.register)
 
 router.get('/login', controller.login)
 router.post('/loginpost', controller.loginpost)
+
+router.get('/logout', controller.logout)
