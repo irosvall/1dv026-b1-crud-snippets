@@ -82,6 +82,9 @@ const main = async () => {
         res.locals.flash = req.session.flash
         delete req.session.flash
       }
+      if (req.session.username) {
+        res.locals.username = req.session.username
+      }
 
       // Pass the base URL to the views.
       res.locals.baseURL = baseURL
@@ -99,6 +102,10 @@ const main = async () => {
         return res
           .status(404)
           .sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
+      } else if (err.status === 403) {
+        return res
+          .status(403)
+          .sendFile(join(directoryFullName, 'views', 'errors', '403.html'))
       }
 
       // 500 Internal Server Error (in production, all other errors send this response).

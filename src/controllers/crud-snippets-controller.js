@@ -6,12 +6,36 @@
  */
 
 import moment from 'moment'
+import createError from 'http-errors'
 import { Snippet } from '../models/snippet.js'
 
 /**
  * Encapsulates the crud snippets controller.
  */
 export class CrudSnippetsController {
+  /**
+   * Authorizes the user.
+   *
+   * If the user is not logged in a 404 is sent, and if the user is logged in,
+   * but not the owner then a 403 is sent.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express response object.
+   * @param {Function} next - Express next middleware function.
+   * @returns {Function} Express next middleware function.
+   */
+  async authorize (req, res, next) {
+    if (!req.session.username) {
+      return next(createError(404))
+    } else if (req.params.id) {
+      const snippet = await Snippet.findOne({ _id: req.params.id })
+      if (snippet.username !== req.session.username) {
+        return next(createError(403))
+      }
+    }
+    next()
+  }
+
   /**
    * Displays a list of text snippets.
    *
@@ -46,7 +70,7 @@ export class CrudSnippetsController {
   async create (req, res) {
     try {
       const snippet = new Snippet({
-        username: 'TestRabbit',
+        username: req.session.username,
         message: req.body.message
       })
 
@@ -90,16 +114,11 @@ export class CrudSnippetsController {
    */
   async update (req, res) {
     try {
-      const result = await Snippet.updateOne({ _id: req.body.id }, {
+      await Snippet.updateOne({ _id: req.body.id }, {
         message: req.body.message
       })
 
-      if (result.nModified === 1) {
-        req.session.flash = { type: 'success', text: 'The post was changed successfully.' }
-      } else {
-        req.session.flash = { type: 'danger', text: 'The post you attempted to edit has been removed.' }
-      }
-
+      req.session.flash = { type: 'success', text: 'The post was changed successfully.' }
       res.redirect('..')
     } catch (error) {
       req.session.flash = { type: 'danger', text: error.message }
