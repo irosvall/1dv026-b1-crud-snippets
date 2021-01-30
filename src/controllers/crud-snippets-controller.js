@@ -14,6 +14,14 @@ import { Snippet } from '../models/snippet.js'
  */
 export class CrudSnippetsController {
   /**
+   * Creates an instance of a crud snippets controller.
+   */
+  constructor () {
+    // Bind 'this' to index so it can use its helper function.
+    this.index = this.index.bind(this)
+  }
+
+  /**
    * Authorizes the user.
    *
    * If the user is not logged in a 404 is sent, and if the user is logged in,
@@ -51,13 +59,30 @@ export class CrudSnippetsController {
             id: snippet._id,
             username: snippet.username,
             message: snippet.message,
-            createdAt: moment(snippet.createdAt).fromNow()
+            createdAt: moment(snippet.createdAt).fromNow(),
+            owner: this.isOwner(req, snippet)
           }))
       }
 
+      console.log(viewData)
       res.render('crud-snippets/index', { viewData })
     } catch (error) {
       next(error)
+    }
+  }
+
+  /**
+   * A helper function to index, which checks if the user is the owner to the snippet.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} snippet - An object representing a snippet.
+   * @returns {boolean} True if user is the owner, otherwise false.
+   */
+  isOwner (req, snippet) {
+    if (snippet.username === req.session.username) {
+      return true
+    } else {
+      return false
     }
   }
 
