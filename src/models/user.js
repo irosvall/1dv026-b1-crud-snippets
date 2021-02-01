@@ -35,6 +35,20 @@ const schema = new mongoose.Schema({
   timestamps: true
 })
 
+// Customizes the error message for unique value errors on username, and email.
+schema.post('save', function (error, doc, next) {
+  if (error.name === 'MongoError' && error.code === 11000) {
+    const errorKeyValue = error.keyValue
+    if (Object.prototype.hasOwnProperty.call(errorKeyValue, 'username')) {
+      next(new Error('The username is already in use.'))
+    } else {
+      next(new Error('The email address is already in use.'))
+    }
+  } else {
+    next()
+  }
+})
+
 // Salts and hashes the password before save.
 schema.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, 10)
