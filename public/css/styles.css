@@ -30,6 +30,13 @@ body {
   margin-top: 66px; /* Added because of the fixed header */
 }
 
+h1 {
+  color: #36485a;
+  font-size: 1.8em;
+  margin: 0;
+  padding: 0.6em 0;
+}
+
 /* ------ Header Styles ----- */
 nav {
   background-color: #e9deda;
@@ -101,6 +108,10 @@ footer p {
   border-radius: 10px;
 }
 
+.snippet p {
+  margin: 0;
+}
+
 .snippet-header {
   display: flex;
 }
@@ -121,6 +132,10 @@ footer p {
 
 .snippet-remove:hover, .snippet-remove:active {
   color: #db1c1c;
+}
+
+.snippet-time {
+  color: #4d4d4d;
 }
 
 /* ------ Snippet post styles ----- */
@@ -190,4 +205,9 @@ a:hover, a:active {
 .flash-danger {
   color: rgb(107, 6, 6);
   background-color: rgb(240, 163, 163);
+}
+
+/* ------ Other styles ----- */
+.center-text {
+  text-align: center;
 }
