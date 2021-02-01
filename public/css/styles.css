@@ -3,12 +3,9 @@
 /* ------ Grundstilen för sidorna ----- */
 
 html {
+  height: 100%;
   font-size: 16px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-html, body {
-  height: 100%;
 }
 
 /* Ta bort inbyggda marginaler och ändra box-sizing */
@@ -26,8 +23,11 @@ main {
 }
 
 body {
+  position: relative;
+  min-height: calc(100vh - 66px);
   background-color: rgb(248, 246, 244);
   margin-top: 66px; /* Added because of the fixed header */
+  padding-bottom: 64px; /* Added because of the absolute footer */
 }
 
 h1 {
@@ -90,6 +90,9 @@ nav li {
 /* ------ Footer Styles ----- */
 
 footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   background-color: #e9deda;
   padding: 8px;
 }
@@ -159,6 +162,25 @@ footer p {
   height: 6em;
 }
 
+/* ------ Login and registration page styles ----- */
+.registration-form, .login-form {
+ display: flex;
+ flex-direction: column;
+ margin: 1em;
+}
+
+.registration-form input, .login-form input {
+  margin: 0 auto;
+  max-width: 300px;
+  font-size: 1.2em;
+  padding: 0.1em;
+  margin-bottom: 0.8em;
+}
+
+.registration-form label, .login-form label {
+  padding-bottom: 0.2em;
+}
+
 /* ------ Button styles ----- */
 
 button {
@@ -168,8 +190,7 @@ button {
   font-weight: 600;
   background-color: #3f5268;
   padding: 0.5em 1.2em 0.5em 1.2em;
-  margin: 0 auto;
-  margin-top: 0.5em;
+  margin: 0.5em auto;
   cursor: pointer;
 }
 
