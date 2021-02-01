@@ -135,13 +135,13 @@ footer p {
 
 .snippet-form textarea {
   display: block;
+  resize: vertical;
   font-size: 1.2em;
   font-family: inherit;
   padding: 0.2em 0.5em;
   margin-top: 5px;
-  resize: none;
-  width: 600px;
-  height: 5em;
+  width: 700px;
+  height: 6em;
 }
 
 /* ------ Button styles ----- */

@@ -1,3 +1,19 @@
+{{#if username }}
+<h2>Hi, {{ username }}! What do you wanna share today?</h2>
+
+<form class="snippet-form" method="post" action="./create">
+  <label for="message">Write your message here:</label>
+  <textarea id="message" name="message" placeholder="What are you doing right now, {{ username }}?" required="required"
+    autofocus="autofocus"></textarea>
+  <button type="submit">Post</button>
+  {{else}}
+  <p>It seems like you are not logged in. To be able to post here you need to be logged in on an account.</p>
+  <a href="./account/login">Log in</a>
+  <p>Don't have an account?</p>
+  <a href="./account/registration">Create account</a>
+  {{/if}}
+</form>
+
 <div id="crud-snippets-container">
   {{#if viewData.snippets.length }}
   {{#each viewData.snippets}}
@@ -21,19 +37,3 @@
   <p class="information">There are no snippets made. Try create one.</p>
   {{/if}}
 </div>
-
-{{>flash}}
-
-{{#if username }}
-<form class="snippet-form" method="post" action="./create">
-  <label for="message">Write your message here:</label>
-  <textarea id="message" name="message" placeholder="What are you doing right now, {{ username }}?" required="required"
-    autofocus="autofocus"></textarea>
-  <button type="submit">Post</button>
-  {{else}}
-  <p>It seems like you are not logged in. To be able to post here you need to be logged in on an account.</p>
-  <a href="./account/login">Log in</a>
-  <p>Don't have an account?</p>
-  <a href="./account/registration">Create account</a>
-  {{/if}}
-</form>

@@ -62,6 +62,7 @@ export class CrudSnippetsController {
             createdAt: moment(snippet.createdAt).fromNow(),
             owner: this.isOwner(req, snippet)
           }))
+          .reverse()
       }
 
       res.render('crud-snippets/index', { viewData })
