@@ -64,7 +64,6 @@ export class CrudSnippetsController {
           }))
       }
 
-      console.log(viewData)
       res.render('crud-snippets/index', { viewData })
     } catch (error) {
       next(error)

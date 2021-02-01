@@ -114,6 +114,11 @@ footer p {
   margin-left: 10px;
 }
 
+.snippet-content {
+  height: min-content;
+  white-space: pre-wrap;
+}
+
 .snippet-remove:hover, .snippet-remove:active {
   color: #db1c1c;
 }
