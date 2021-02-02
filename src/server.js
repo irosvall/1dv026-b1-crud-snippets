@@ -66,11 +66,16 @@ const main = async () => {
       resave: false, // Resave even if a request is not changing the session.
       saveUninitialized: false, // Don't save a created but not modified session.
       cookie: {
-        secure: false, // TODO: Change in production
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24, // 1 day
         sameSite: 'lax'
       }
+    }
+
+    if (app.get('env') === 'production') {
+      console.log('Running in production')
+      app.set('trust proxy', 1)
+      sessionOptions.cookie.secure = true
     }
 
     app.use(session(sessionOptions))
