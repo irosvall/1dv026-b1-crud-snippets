@@ -32,10 +32,13 @@
     </div>
     <div class="snippet-footer">
       <time class="snippet-time">{{this.createdAt}}</time>
+      {{#if this.isEdited }}
+      <span>(Edited)</span>
+      {{/if}}
     </div>
   </div>
   {{/each}}
   {{else}}
-  <p class="information">There are no snippets made. Try create one.</p>
+  <p class="information">There are no posts. Try create one.</p>
   {{/if}}
 </div>

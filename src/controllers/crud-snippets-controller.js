@@ -60,7 +60,8 @@ export class CrudSnippetsController {
             username: snippet.username,
             message: snippet.message,
             createdAt: moment(snippet.createdAt).fromNow(),
-            owner: this.isOwner(req, snippet)
+            owner: this.isOwner(req, snippet),
+            isEdited: this.isEdited(snippet)
           }))
           .reverse()
       }
@@ -80,6 +81,20 @@ export class CrudSnippetsController {
    */
   isOwner (req, snippet) {
     if (snippet.username === req.session.username) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  /**
+   * A helper function to index, which checks if the user has edited the snippet or not.
+   *
+   * @param {object} snippet - An object representing a snippet.
+   * @returns {boolean} True if snippet is the edited, otherwise false.
+   */
+  isEdited (snippet) {
+    if (String(snippet.createdAt) !== String(snippet.updatedAt)) {
       return true
     } else {
       return false
