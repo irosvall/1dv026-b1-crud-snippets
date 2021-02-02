@@ -112,6 +112,7 @@ footer p {
 }
 
 .snippet p {
+  word-wrap: break-word;
   margin: 0;
 }
 
