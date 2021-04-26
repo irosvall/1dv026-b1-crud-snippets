@@ -1,5 +1,9 @@
 # Assignment B1 - CRUD Snippets
 
+This application was a project I made as a part of my studies at Linnaeus University, completed 2021-02-02.
+
+## The assignment description
+
 In this assignment, you will create a web application to manage code [snippets](https://en.wikipedia.org/wiki/Snippet_(programming)). The web application will use the Node.js platform, Express as the application framework, and Mongoose as the object data modeling (ODM) library for MongoDB.
 
 You must use the repository created for you and this assignment and make continuous commits, so it is possible to follow the web application's creation. Make sure that no more files than necessary are committed to the repository. (#6)
